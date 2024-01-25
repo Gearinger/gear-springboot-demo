@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_test?useUnicode=true&characterEncoding=utf-8
+    username: postgres
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+    sql:
+      show-sql: true
+      format-sql: true
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          format_sql: true
+          use_new_id_generator_mixin: true
+
+#pg方言，需要配置，否则会出现org.hibernate.type.SerializationException: could not deserialize
+spring.jpa.database-platform: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
