@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration= \
+  com.gear.controller.TestController, \
+  com.gear.config.SubmoduleConfig
