@@ -1,0 +1,33 @@
+server:
+  port: 9999
+
+## gateway
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 111.229.255.253:9003
+        namespace: Public
+
+  cloud.gateway.routes:
+    - id: auth-service-route
+      uri: http://127.0.0.1:10001
+      predicates:
+        - Path=/auth/**
+      filters:
+        - StripPrefix=1
+    - id: api-service-route
+      uri: http://127.0.0.1:10002
+      predicates:
+        - Path=/api/**
+      filters:
+        - StripPrefix=1
+  security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://127.0.0.1:10000/.well-known/jwks.json'
+
+## white list
+secure:
+  ignore:
+    urls: #配置白名单路径
+      - "/actuator/**"
+      - "/auth/oauth/token"
+      - "/api/no-auth"

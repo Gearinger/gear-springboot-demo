@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: Market
+  cloud:
+    nacos:
+      config:
+        enabled: false
+      # 注册中心
+      discovery:
+        server-addr: 111.229.255.253:9003
+        namespace: public
+        group: dev
+feign:
+  hystrix:
+    enabled: true

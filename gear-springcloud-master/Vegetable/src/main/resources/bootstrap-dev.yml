@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: Vegetable
+  cloud:
+    nacos:
+      config:
+        # 默认对应的 data-id 为 {application.name} + "-" + {profiles.active} + "." + {file-extension}
+        # 使用这个也可以 data-id  {application.name} + "." + {file-extension}
+        server-addr: 111.229.255.253:9003
+        file-extension: yaml
+        namespace: public
+        group: dev
+
+        # 拓展的配置项，优先级更低
+        extension-configs:
+          - data-id: shareconfig.yaml
+            group: dev2
+
+      # 注册中心
+      discovery:
+        server-addr: 111.229.255.253:9003
+        namespace: public
+        group: dev

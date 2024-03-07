@@ -1,0 +1,63 @@
+server:
+  port: 10000
+## actuator
+management:
+  endpoints:
+    web.exposure.include: "*"
+
+application:
+  security:
+    oauth:
+      client[0]:
+        registered-redirect-uri: http://example.com
+        # 客户端 id
+        client-id: client1
+        # 客户端密钥
+        client-secret: $2a$10$u0YGAyd40nm6oCE6rcq/KuYfpYffXUZyYju9LcAr9GgcM02twe3GW
+        # 授权范围
+        scope: all
+        # token 有效期
+        access-token-validity-seconds: 6000
+        # 刷新 token 的有效期
+        refresh-token-validity-seconds: 6000
+        # 允许的授权类型
+        grant-type: authorization_code,password,refresh_token,client_credentials
+        # 可以访问的资源 id
+        # resource-ids: oauth2
+      client[1]:
+        registered-redirect-uri: http://example.com
+        # 客户端 id
+        client-id: client2
+        # 客户端密钥
+        client-secret: $2a$10$J5HdfBO64K8eDoNC.C7ljelShUN/nFfASLGHnNN6V1ZPyHFdUZpzW
+        # 授权范围
+        scope: all
+        # token 有效期
+        access-token-validity-seconds: 6000
+        # 刷新 token 的有效期
+        refresh-token-validity-seconds: 6000
+        # 允许的授权类型
+        grant-type: authorization_code,password,refresh_token,client_credentials
+        # 可以访问的资源 id
+        # resource-ids: oauth
+
+## redis
+spring:
+  redis:
+    jedis:
+      pool:
+        max-active: 20
+    host: 111.229.255.253
+    port: 9004
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 111.229.255.253:9003
+  application:
+    name: Auth
+
+## 对称加密
+keypair:
+  filename: didigps.jks
+  alias: didigps
+  password: DiDiAdmin@020

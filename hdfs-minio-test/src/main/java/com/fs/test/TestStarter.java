@@ -24,46 +24,46 @@ public class TestStarter {
         long startTime, allTime;
 
         // 测试 HDFS
-//        System.out.println("--------------测试 HDFS----------------");
-//        startTime = System.currentTimeMillis();
-//        System.out.println(new DateTime(startTime));
-//
-//        new HDFSTest(BUCKET_NAME).uploadLargeNumberFile(TILES_PATH);
-//
-//        allTime = System.currentTimeMillis() - startTime;
-//        System.out.println(allTime / 1000.0);
+        System.out.println("--------------测试 HDFS----------------");
+        startTime = System.currentTimeMillis();
+        System.out.println(new DateTime(startTime));
+
+        new HDFSTest(BUCKET_NAME).uploadLargeNumberFile(TILES_PATH);
+
+        allTime = System.currentTimeMillis() - startTime;
+        System.out.println(allTime / 1000.0);
 
         // 测试 HDFS 多线程
-//        System.out.println("--------------测试 HDFS 多线程----------------");
-//        startTime = System.currentTimeMillis();
-//        System.out.println(new DateTime(startTime));
-//
-//        new HDFSTest(BUCKET_NAME).uploadLargeNumberFileByPool(TILES_PATH, poolExecutor);
-//
-//        allTime = System.currentTimeMillis() - startTime;
-//        System.out.println(allTime / 1000.0);
+        System.out.println("--------------测试 HDFS 多线程----------------");
+        startTime = System.currentTimeMillis();
+        System.out.println(new DateTime(startTime));
+
+        new HDFSTest(BUCKET_NAME).uploadLargeNumberFileByPool(TILES_PATH, poolExecutor);
+
+        allTime = System.currentTimeMillis() - startTime;
+        System.out.println(allTime / 1000.0);
 
 
-//        // 测试 MinIO
-//        System.out.println("--------------测试 MinIO----------------");
-//        startTime = System.currentTimeMillis();
-//        System.out.println(new DateTime(startTime));
-//
-//        new MinioTest(BUCKET_NAME).uploadLargeNumberFile(TILES_PATH);
-//
-//        allTime = System.currentTimeMillis() - startTime;
-//        System.out.println(allTime/1000.0);
+        // 测试 MinIO
+        System.out.println("--------------测试 MinIO----------------");
+        startTime = System.currentTimeMillis();
+        System.out.println(new DateTime(startTime));
+
+        new MinioTest(BUCKET_NAME).uploadLargeNumberFile(TILES_PATH);
+
+        allTime = System.currentTimeMillis() - startTime;
+        System.out.println(allTime/1000.0);
 
         // 测试 MinIO 多线程
-//        System.out.println("--------------测试 MinIO 多线程----------------");
-//        System.out.println("线程数：" + poolExecutor.getCorePoolSize());
-//        startTime = System.currentTimeMillis();
-//        System.out.println(new DateTime(startTime));
-//
-//        new MinioTest(BUCKET_NAME + "pool").uploadLargeNumberFileByPool(TILES_PATH, poolExecutor);
-//
-//        allTime = System.currentTimeMillis() - startTime;
-//        System.out.println(allTime / 1000.0);
+        System.out.println("--------------测试 MinIO 多线程----------------");
+        System.out.println("线程数：" + poolExecutor.getCorePoolSize());
+        startTime = System.currentTimeMillis();
+        System.out.println(new DateTime(startTime));
+
+        new MinioTest(BUCKET_NAME + "pool").uploadLargeNumberFileByPool(TILES_PATH, poolExecutor);
+
+        allTime = System.currentTimeMillis() - startTime;
+        System.out.println(allTime / 1000.0);
         
         
         // 访问测试

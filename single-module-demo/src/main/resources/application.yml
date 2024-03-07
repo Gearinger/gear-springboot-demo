@@ -1,0 +1,10 @@
+file:
+  path: test
+  temp:
+    linuxPath: /tmp
+    windowsPath: C:\temp
+
+config2:
+  name: name
+  temp:
+    child-name: child-name

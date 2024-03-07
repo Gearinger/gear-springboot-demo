@@ -1,0 +1,30 @@
+
+server.port: 10001
+
+# mysql
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/pos?serverTimezone=UTC&useSSL=false&autoReconnect=true&tinyInt1isBit=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.alibaba.druid.proxy.DruidDriver
+    dbcp2:
+      driver: com.mysql.cj.jdbc.Driver
+
+
+mybatis-plus:
+  mapper-locations: classpath*:com/gear/shiro/dao/mapping/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazyLoadingEnabled: true
+    multipleResultSetsEnabled: true
+
+logging:
+  level:
+    org.springframework.web.servlet: ERROR
+
