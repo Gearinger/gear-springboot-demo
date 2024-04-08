@@ -1,0 +1,13 @@
+server:
+  port: 9010
+
+spring:
+  elasticsearch:
+    uris: https://localhost:9200
+    password: b3M*r6f3bs+qAmsRTlAu
+    username: elastic
+#    password: buWFYsXinLs0ElvZ47UB
+  servlet:
+    multipart:
+      max-file-size: 10000MB
+      max-request-size: 10000MB
