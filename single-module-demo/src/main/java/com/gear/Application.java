@@ -10,6 +10,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+
 @RestController
 @SpringBootApplication
 public class Application {
@@ -34,6 +36,7 @@ public class Application {
 
 
     public static void main(String[] args) {
+        System.out.println(new File("").getAbsolutePath());
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
         printSysUrl(context);
     }
