@@ -1,0 +1,17 @@
+spring:
+  sql:
+    init:
+      schema-locations: classpath:sql/data.sql  # DDL语句在resources/sql/schema.sql
+      data-locations: classpath:sql/data.sql  # sql文件是resources/sql/data.sql
+      mode: always
+  jpa:
+    defer-datasource-initialization: true  # 这个必须加上，表示开启数据初始化
+    hibernate:
+      ddl-auto: create  # 这里还是每次重新创建数据库；如果使用update的话，会因为导入重复数据导致违反唯一性约束，程序无法启动
+    show-sql: false
+    properties:
+      hibernate:
+        default_batch_fetch_size: 5000
+        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+        jdbc:
+          batch_size: 5000
