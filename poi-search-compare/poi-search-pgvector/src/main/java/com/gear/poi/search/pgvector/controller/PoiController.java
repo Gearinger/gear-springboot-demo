@@ -1,13 +1,12 @@
-package com.gear.poi.search.postgis.controller;
+package com.gear.poi.search.pgvector.controller;
 
-import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.ZipUtil;
-import com.gear.poi.search.postgis.entity.PoiEntity;
-import com.gear.poi.search.postgis.repository.PoiRepository;
-import com.gear.poi.search.postgis.service.PoiService;
+import cn.hutool.json.JSONUtil;
+import com.gear.poi.search.pgvector.entity.PoiEntity;
+import com.gear.poi.search.pgvector.repository.PoiRepository;
+import com.gear.poi.search.pgvector.service.PoiService;
+import com.gear.poi.search.pgvector.word2vec.Word2Vec;
 import com.huaban.analysis.jieba.JiebaSegmenter;
-import idea.verlif.mock.data.MockDataCreator;
-import idea.verlif.mock.data.creator.data.DoubleRandomCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.geotools.data.DataStore;
@@ -15,8 +14,6 @@ import org.geotools.data.DataStoreFinder;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
@@ -41,11 +38,14 @@ public class PoiController {
     private final PoiService poiService;
     private final static JiebaSegmenter jiebaSegmenter = new JiebaSegmenter();
 
+    private final Word2Vec word2Vec;
+
     @GetMapping("/queryByKeyWord")
     public List<PoiEntity> queryByKeyWord(@RequestParam String word) {
         List<String> strings = jiebaSegmenter.sentenceProcess(word);
-        String keyWords = strings.stream().reduce((a, b) -> a + " | " + b).orElse("");
-        return poiRepository.queryByKeyWord(keyWords);
+        float[] floats = this.caculateAvgVectorFromWords(strings);
+        String words_vec = JSONUtil.toJsonStr(floats);
+        return poiRepository.queryByKeyWord(words_vec);
     }
 
     @GetMapping("/findWithin")
@@ -84,6 +84,13 @@ public class PoiController {
             poiEntity.setAddress(String.valueOf(next.getAttribute("addr")));
             List<String> strings = jiebaSegmenter.sentenceProcess(poiEntity.getName() + poiEntity.getAddress());
             poiEntity.setKeyWords(strings.toString());
+
+            float[] avgVectorFromWords = this.caculateAvgVectorFromWords(strings);
+            if(avgVectorFromWords.length!=300){
+                continue;
+            }
+            poiEntity.setAvgVectorFromWords(JSONUtil.toJsonStr(avgVectorFromWords));
+
             poiEntityList.add(poiEntity);
             importCount++;
             if (poiEntityList.size() >= 3000) {
@@ -103,37 +110,20 @@ public class PoiController {
         return "导入poi数据完成，共 " + importCount + " 条";
     }
 
-
-    @PostMapping("/createMockData")
-    public String createMockData(@RequestParam Integer count) throws IOException {
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 0, java.util.concurrent.TimeUnit.SECONDS, new java.util.concurrent.ArrayBlockingQueue<Runnable>(1000));
-        MockDataCreator creator = new MockDataCreator();
-        GeometryFactory geometryFactory = new GeometryFactory();
-        creator.getConfig()
-                // 开启级联构建并对默认值进行替换
-                .autoCascade(true).forceNew(true)
-                .fieldObject(Point.class, null)
-                // 如果需要，也可以设定其他double类型的默认范围
-                .fieldValue(double.class, new DoubleRandomCreator(0D, 1000D));
-        List<PoiEntity> poiEntityList = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            PoiEntity poiEntity = creator.mock(PoiEntity.class);
-            Coordinate coordinate = new Coordinate(RandomUtil.randomDouble(100, 140), RandomUtil.randomDouble(20, 40));
-            poiEntity.setLocation(geometryFactory.createPoint(coordinate));
-            poiEntityList.add(poiEntity);
-            if (poiEntityList.size() >= 3000) {
-                ArrayList<PoiEntity> poiEntities = new ArrayList<>(poiEntityList);
-                executor.execute(() -> {
-                    poiRepository.saveAllAndFlush(poiEntities);
-                    log.info("{},导入poi数据 {} 条", Thread.currentThread().getName(), poiEntities.size());
-                });
-
-                poiEntityList.clear();
-            }
+    private float[] caculateAvgVectorFromWords(List<String> strings) {
+        float[] floats = strings.stream()
+                .map(word2Vec::getWordVector)
+                .filter(Objects::nonNull)
+                .reduce((a, b) -> {
+                    for (int i = 0; i < a.length; i++) {
+                        a[i] += b[i];
+                    }
+                    return a;
+                }).orElse(new float[0]);
+        for (int i = 0; i < floats.length; i++) {
+            floats[i] = floats[i] / strings.size();
         }
-        poiRepository.saveAllAndFlush(poiEntityList);
-        log.info("导入poi数据完成，共 {} 条", count);
-        return "导入poi数据完成，共 " + count + " 条";
+        return floats;
     }
 
     private static void verifyFile(MultipartFile file) {

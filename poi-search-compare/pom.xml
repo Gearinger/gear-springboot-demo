@@ -18,6 +18,7 @@
         <module>poi-search-postgis</module>
         <module>poi-search-es</module>
         <module>poi-search-zincsearch</module>
+        <module>poi-search-pgvector</module>
     </modules>
 
     <properties>

@@ -49,8 +49,9 @@ public class Config {
         SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, (arg0, arg1) -> true).build();
         RestClientBuilder builder = RestClient.builder(HttpHost.create(serverUrl))
                 .setHttpClientConfigCallback(httpClientBuilder -> {
-                    httpClientBuilder.setSSLContext(sslContext);
-                    httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+                    httpClientBuilder.setSSLContext(sslContext)
+                            .setSSLHostnameVerifier((s, sslSession) -> true)
+                            .setDefaultCredentialsProvider(credentialsProvider);
                     return httpClientBuilder;
                 });
         try {

@@ -3,10 +3,11 @@ server:
 
 spring:
   elasticsearch:
-    uris: https://localhost:9200
-    password: b3M*r6f3bs+qAmsRTlAu
+    uris: https://192.168.20.152:9200
+#    password: b3M*r6f3bs+qAmsRTlAu
     username: elastic
-#    password: buWFYsXinLs0ElvZ47UB
+    password: 123456
+  #    password: buWFYsXinLs0ElvZ47UB
   servlet:
     multipart:
       max-file-size: 10000MB
