@@ -87,7 +87,6 @@ public class EsPoiController {
             String pointWkt = WKTWriter2.toPoint(point.getCoordinate());
             poiEntity.setLocation(pointWkt);
             poiEntity.setType(String.valueOf(next.getAttribute("type")));
-            poiEntity.setInfo(String.valueOf(next.getAttribute("business_h")));
             poiEntity.setAddress(String.valueOf(next.getAttribute("addr")));
             poiEntityList.add(poiEntity);
             importCount++;

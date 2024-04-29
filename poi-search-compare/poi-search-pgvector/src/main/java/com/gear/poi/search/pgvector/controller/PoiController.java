@@ -80,7 +80,6 @@ public class PoiController {
             poiEntity.setName(String.valueOf(next.getAttribute("name")));
             poiEntity.setLocation((Point) next.getAttribute("the_geom"));
             poiEntity.setType(String.valueOf(next.getAttribute("type")));
-            poiEntity.setInfo(String.valueOf(next.getAttribute("business_h")));
             poiEntity.setAddress(String.valueOf(next.getAttribute("addr")));
             List<String> strings = jiebaSegmenter.sentenceProcess(poiEntity.getName() + poiEntity.getAddress());
             poiEntity.setKeyWords(strings.toString());
