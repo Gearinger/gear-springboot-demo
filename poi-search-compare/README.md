@@ -1,0 +1,1 @@
+[Chinese-Word-Vectors/README_zh.md at master · Embedding/Chinese-Word-Vectors (github.com)](https://github.com/Embedding/Chinese-Word-Vectors/blob/master/README_zh.md)
