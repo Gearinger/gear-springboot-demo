@@ -1,0 +1,9 @@
+/.idea/
+/*/*.iml
+/.idea/**
+/*/target/**
+/*/target2/**
+
+*.log
+*.iml
+temp

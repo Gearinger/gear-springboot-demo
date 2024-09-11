@@ -1,0 +1,8 @@
+server:
+  port: 9002
+
+sys:
+  license:
+    client:
+      # 由服务器端接口生成
+      active-code: C7zVkeV4YtkIsOVJ7X5BY7wDdJ6FgHq/7LMcgbl3QbALOKzzQylHTMT7JPLUgiO8uho1Ch+uwxtn2qRiNWD7m+MIFy9cpcofAxmuf/pKSHArHdHl3AZ+lgLEIP9KYw2zmMt5j+tXhpbQPGg1ZYrm7jhIadzPI4js1IjMPY4ieeAMOPf5afBeQExWDTo7J21EWeEq5FLmODsA4jctO/mwROAMhK+mBVFH/DJxtySEVbCce3nK+kTEFZ0K/kip9X0cqykvqZpT34gxoKSb9Yzg1EHw4tuuEXvGs/g9ho8w+L8cyqxXTi2lXMk3n/Rt0TzVl8yQtEeJ9KmJAsFonP4lnQ==

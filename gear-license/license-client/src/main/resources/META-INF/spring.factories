@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.gear.config.LicenseClientConfig,\
+  com.gear.init.LicenseScheduleVerify,\
+  com.gear.controller.LicenseClientController
