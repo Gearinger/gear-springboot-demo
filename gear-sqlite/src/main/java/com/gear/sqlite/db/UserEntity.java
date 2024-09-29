@@ -7,11 +7,11 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Long userId;
 
     @Column
     private String username;

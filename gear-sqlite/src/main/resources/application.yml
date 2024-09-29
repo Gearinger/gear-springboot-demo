@@ -1,7 +1,9 @@
 spring:
   datasource:
-    url: jdbc:sqlite:db
     driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:db
+    druid:
+      max-active: 1
 
   jpa:
     hibernate:
