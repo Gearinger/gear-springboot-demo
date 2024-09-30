@@ -3,22 +3,20 @@ package com.gear.sqlite.db;
 import com.gear.sqlite.common.ItemEntityConverter;
 import lombok.Data;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "order")
+@Table(name = "orderr")
 public class OrderEntity extends BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
 
-    private String orderIdentity;
+    private String orderNo;
 
     private Integer userId;
 
@@ -28,6 +26,14 @@ public class OrderEntity extends BaseEntity {
 
     private String status;
 
+    /**
+     * 金额
+     */
+    private BigDecimal amount;
+
+    /**
+     * 付款
+     */
     private BigDecimal payment;
 
     @Convert(converter = ItemEntityConverter.class)

@@ -5,7 +5,13 @@ import com.gear.sqlite.db.ItemEntity;
 import java.util.List;
 
 public interface IItemService {
-    ItemEntity add(ItemEntity item);
+    ItemEntity create(ItemEntity item);
 
-    List<ItemEntity> listAll();
+    List<ItemEntity> list();
+
+    ItemEntity update(ItemEntity item);
+
+    void delete(Integer id);
+
+    List<ItemEntity> listByIds(List<Integer> itemIds);
 }

@@ -14,14 +14,29 @@ public class ItemController {
 
     private final IItemService itemService;
 
-    @GetMapping("/listAll")
-    public List<ItemEntity> listAll() {
-        return itemService.listAll();
+    @GetMapping
+    public List<ItemEntity> listByIds(List<Integer> itemIds) {
+        return itemService.listByIds(itemIds);
     }
 
-    @PostMapping("/add")
-    public ItemEntity add(@RequestBody ItemEntity item) {
-        return itemService.add(item);
+    @GetMapping("/list")
+    public List<ItemEntity> list() {
+        return itemService.list();
+    }
+
+    @PostMapping("/create")
+    public ItemEntity create(@RequestBody ItemEntity item) {
+        return itemService.create(item);
+    }
+
+    @PostMapping("/update")
+    public ItemEntity update(@RequestBody ItemEntity item) {
+        return itemService.update(item);
+    }
+
+    @PostMapping("/delete")
+    public void delete(Integer id) {
+        itemService.delete(id);
     }
 
 }

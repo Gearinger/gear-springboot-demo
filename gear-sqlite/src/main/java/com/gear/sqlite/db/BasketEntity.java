@@ -3,10 +3,7 @@ package com.gear.sqlite.db;
 import com.gear.sqlite.common.IntegerListConverter;
 import lombok.Data;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -15,6 +12,7 @@ import java.util.List;
 public class BasketEntity extends BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer basketId;
 
     private String basketName;
