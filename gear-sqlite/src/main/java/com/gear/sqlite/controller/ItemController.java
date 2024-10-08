@@ -1,5 +1,6 @@
 package com.gear.sqlite.controller;
 
+import com.gear.sqlite.config.Result;
 import com.gear.sqlite.db.ItemEntity;
 import com.gear.sqlite.service.IItemService;
 import lombok.RequiredArgsConstructor;
@@ -15,23 +16,27 @@ public class ItemController {
     private final IItemService itemService;
 
     @GetMapping
-    public List<ItemEntity> listByIds(List<Integer> itemIds) {
-        return itemService.listByIds(itemIds);
+    public Result<List<ItemEntity>> listByIds(List<Integer> itemIds) {
+        List<ItemEntity> itemEntities = itemService.listByIds(itemIds);
+        return Result.success(itemEntities);
     }
 
     @GetMapping("/list")
-    public List<ItemEntity> list() {
-        return itemService.list();
+    public Result<List<ItemEntity>> list() {
+        List<ItemEntity> list = itemService.list();
+        return Result.success(list);
     }
 
     @PostMapping("/create")
-    public ItemEntity create(@RequestBody ItemEntity item) {
-        return itemService.create(item);
+    public Result<ItemEntity> create(@RequestBody ItemEntity item) {
+        ItemEntity itemEntity = itemService.create(item);
+        return Result.success(itemEntity);
     }
 
     @PostMapping("/update")
-    public ItemEntity update(@RequestBody ItemEntity item) {
-        return itemService.update(item);
+    public Result<ItemEntity> update(@RequestBody ItemEntity item) {
+        ItemEntity update = itemService.update(item);
+        return Result.success(update);
     }
 
     @PostMapping("/delete")

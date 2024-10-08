@@ -41,4 +41,6 @@ public class SystemConfig {
      */
     private Integer refreshExpireTime = 25;
 
+    private Boolean enableAuth = true;
+
 }

@@ -1,5 +1,6 @@
 package com.gear.sqlite.controller;
 
+import com.gear.sqlite.config.Result;
 import com.gear.sqlite.db.BasketEntity;
 import com.gear.sqlite.service.IBasketService;
 import lombok.RequiredArgsConstructor;
@@ -15,18 +16,21 @@ public class BasketController {
     private final IBasketService basketService;
 
     @PostMapping("/create")
-    public BasketEntity create(@RequestBody BasketEntity basket) {
-        return basketService.create(basket);
+    public Result<BasketEntity> create(@RequestBody BasketEntity basket) {
+        BasketEntity basketEntity = basketService.create(basket);
+        return Result.success(basketEntity);
     }
 
     @PostMapping("/update")
-    public BasketEntity update(@RequestBody BasketEntity basket) {
-        return basketService.update(basket);
+    public Result<BasketEntity> update(@RequestBody BasketEntity basket) {
+        BasketEntity update = basketService.update(basket);
+        return Result.success(update);
     }
 
     @GetMapping("/list")
-    public List<BasketEntity> list() {
-        return basketService.list();
+    public Result<List<BasketEntity>> list() {
+        List<BasketEntity> list = basketService.list();
+        return Result.success(list);
     }
 
     @PostMapping("/delete")

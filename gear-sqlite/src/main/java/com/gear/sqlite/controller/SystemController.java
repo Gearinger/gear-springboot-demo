@@ -1,5 +1,6 @@
 package com.gear.sqlite.controller;
 
+import com.gear.sqlite.config.Result;
 import com.gear.sqlite.db.UserEntity;
 import com.gear.sqlite.dto.UserDTO;
 import com.gear.sqlite.dto.UserRegisterDTO;
@@ -20,8 +21,9 @@ public class SystemController {
     private final IUserService userService;
 
     @PostMapping("/login")
-    public UserDTO login(String username, String password, HttpServletRequest request) {
-        return userService.login(username, password, request);
+    public Result<UserDTO> login(String username, String password, HttpServletRequest request) {
+        UserDTO login = userService.login(username, password, request);
+        return Result.success(login);
     }
 
     @PostMapping("/logout")
@@ -30,13 +32,15 @@ public class SystemController {
     }
 
     @PostMapping("/register")
-    public UserEntity register(@RequestBody UserRegisterDTO user) {
-        return userService.register(user);
+    public Result<UserEntity> register(@RequestBody UserRegisterDTO user) {
+        UserEntity register = userService.register(user);
+        return Result.success(register);
     }
 
     @PostMapping("/refreshToken")
-    public UserDTO refreshToken(String refreshToken) {
-        return userService.refreshToken(refreshToken);
+    public Result<UserDTO> refreshToken(String refreshToken) {
+        UserDTO userDTO = userService.refreshToken(refreshToken);
+        return Result.success(userDTO);
     }
 
 }

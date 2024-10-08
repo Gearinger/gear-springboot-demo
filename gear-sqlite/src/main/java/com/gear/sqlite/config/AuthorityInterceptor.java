@@ -22,6 +22,8 @@ public class AuthorityInterceptor implements HandlerInterceptor {
 
     private final ITokenService tokenService;
 
+    private final SystemConfig systemConfig;
+
     /**
      * 请求执行前执行的，将用户信息放入ThreadLocal
      *
@@ -33,6 +35,9 @@ public class AuthorityInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (!systemConfig.getEnableAuth()) {
+            return true;
+        }
         String token = extractTokenFromRequest(request);
         UserDTO userDTO = userService.getUserByToken(token);
         if (userDTO == null) {

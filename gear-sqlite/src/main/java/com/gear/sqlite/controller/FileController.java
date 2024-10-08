@@ -1,5 +1,6 @@
 package com.gear.sqlite.controller;
 
+import com.gear.sqlite.config.Result;
 import com.gear.sqlite.db.FileEntity;
 import com.gear.sqlite.service.IFileService;
 import lombok.RequiredArgsConstructor;
@@ -18,18 +19,21 @@ public class FileController {
     private final IFileService fileService;
 
     @PostMapping("/upload")
-    public FileEntity upload(@RequestPart MultipartFile file) throws IOException {
-        return fileService.add(file);
+    public Result<FileEntity> upload(@RequestPart MultipartFile file) throws IOException {
+        FileEntity add = fileService.add(file);
+        return Result.success(add);
     }
 
     @GetMapping("/list")
-    public List<FileEntity> list(){
-        return fileService.list();
+    public Result<List<FileEntity>> list(){
+        List<FileEntity> list = fileService.list();
+        return Result.success(list);
     }
 
     @GetMapping("/getInfoById")
-    public FileEntity getInfoById(Integer id){
-        return fileService.getById(id);
+    public Result<FileEntity> getInfoById(Integer id){
+        FileEntity fileEntity = fileService.getById(id);
+        return Result.success(fileEntity);
     }
 
     @GetMapping("/download")

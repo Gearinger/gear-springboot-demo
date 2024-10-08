@@ -1,5 +1,6 @@
 package com.gear.sqlite.controller;
 
+import com.gear.sqlite.config.Result;
 import com.gear.sqlite.db.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,14 @@ public class UserController {
     private final IUserService userService;
 
     @GetMapping("/getAll")
-    public List<UserEntity> getAll() {
-        return userService.list();
+    public Result<List<UserEntity>> getAll() {
+        List<UserEntity> list = userService.list();
+        return Result.success(list);
     }
 
     @PostMapping("/add")
-    public UserEntity add(UserEntity user) {
-        return userService.save(user);
+    public Result<UserEntity> add(UserEntity user) {
+        UserEntity userEntity = userService.save(user);
+        return Result.success(userEntity);
     }
 }
