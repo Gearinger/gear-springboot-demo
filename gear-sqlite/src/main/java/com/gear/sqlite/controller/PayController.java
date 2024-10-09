@@ -1,5 +1,6 @@
 package com.gear.sqlite.controller;
 
+import com.gear.sqlite.config.Result;
 import com.gear.sqlite.db.PaymentEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,8 @@ import java.util.List;
 public class PayController {
 
     @PostMapping("/pay")
-    public PaymentEntity pay(Integer orderId) {
-        return null;
+    public Result<PaymentEntity> pay(Integer orderId) {
+        return Result.error("");
     }
 
     @PostMapping("/payFinishHandler")

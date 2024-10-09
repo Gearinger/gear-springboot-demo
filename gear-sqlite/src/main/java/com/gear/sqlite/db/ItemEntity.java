@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gear.sqlite.common.Transform;
 import com.gear.sqlite.common.TransformConverter;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -39,6 +42,7 @@ public class ItemEntity extends BaseEntity {
     /**
      * 描述
      */
+    @Length(max = 255, message = "描述长度不能超过255")
     private String description;
 
     /**
@@ -70,6 +74,7 @@ public class ItemEntity extends BaseEntity {
 
     private String type;
 
+    @NotNull(message = "价格不能为空")
     private BigDecimal price;
 
 }

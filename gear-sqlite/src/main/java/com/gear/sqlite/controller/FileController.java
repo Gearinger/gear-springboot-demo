@@ -25,24 +25,32 @@ public class FileController {
     }
 
     @GetMapping("/list")
-    public Result<List<FileEntity>> list(){
+    public Result<List<FileEntity>> list() {
         List<FileEntity> list = fileService.list();
         return Result.success(list);
     }
 
     @GetMapping("/getInfoById")
-    public Result<FileEntity> getInfoById(Integer id){
+    public Result<FileEntity> getInfoById(Integer id) {
         FileEntity fileEntity = fileService.getById(id);
         return Result.success(fileEntity);
     }
 
+    /**
+     * 下载
+     *
+     * @param response 响应
+     * @param id       身份证件
+     * @throws IOException IOException
+     * @Content-type: application/octet-stream
+     */
     @GetMapping("/download")
     public void download(HttpServletResponse response, Integer id) throws IOException {
         fileService.download(response, id);
     }
 
     @PostMapping("/delete")
-    public void delete(Integer id){
+    public void delete(Integer id) {
         fileService.delete(id);
     }
 }

@@ -29,4 +29,9 @@ public class UserController {
         UserEntity userEntity = userService.save(user);
         return Result.success(userEntity);
     }
+
+    @PostMapping("/delete")
+    public void delete(Integer id) {
+        userService.delete(id);
+    }
 }

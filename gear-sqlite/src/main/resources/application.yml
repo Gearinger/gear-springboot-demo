@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   servlet:
     multipart:
@@ -14,3 +17,25 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  boot:
+    admin:
+      ## admin 服务端访问地址
+      context-path: /admin
+      ## admin 客户端连接服务端
+      client:
+        # 为了显示客户端的ip否则是以主机名显示的，这样需要添加hosts影射。
+        url: http://localhost:${server.port}${spring.boot.admin.context-path}
+        instance:
+          prefer-ip: true
+          name: gear-sqlite
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

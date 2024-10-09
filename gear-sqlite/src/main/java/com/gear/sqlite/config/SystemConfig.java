@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 系统配置
@@ -19,15 +19,6 @@ import java.io.File;
 @Configuration
 @ConfigurationProperties(prefix = "system")
 public class SystemConfig {
-
-    @PostConstruct
-    public void init() {
-        File file = new File(storagePath);
-        if (!file.exists()) {
-            log.info("创建文件目录:{}", storagePath);
-            file.mkdirs();
-        }
-    }
 
     private String storagePath = "./data/storage";
 
@@ -42,5 +33,7 @@ public class SystemConfig {
     private Integer refreshExpireTime = 25;
 
     private Boolean enableAuth = true;
+
+    private List<String> whiteListUrl = new ArrayList<>();
 
 }

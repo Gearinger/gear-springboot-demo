@@ -1,6 +1,6 @@
 package com.gear.sqlite.db;
 
-import com.gear.sqlite.common.ItemEntityConverter;
+import com.gear.sqlite.common.ListConverter;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -36,7 +36,7 @@ public class OrderEntity extends BaseEntity {
      */
     private BigDecimal payment;
 
-    @Convert(converter = ItemEntityConverter.class)
+    @Convert(converter = ListConverter.class)
     private List<ItemEntity> items;
 
 }

@@ -6,6 +6,7 @@ import com.gear.sqlite.db.TokenEntity;
 import com.gear.sqlite.db.UserEntity;
 import com.gear.sqlite.dto.UserDTO;
 import com.gear.sqlite.dto.UserRegisterDTO;
+import com.gear.sqlite.enums.RoleEnum;
 import com.gear.sqlite.mapper.UserMapper;
 import com.gear.sqlite.service.ITokenService;
 import com.gear.sqlite.service.IUserService;
@@ -54,7 +55,7 @@ public class UserServiceImpl implements IUserService {
         userDTO.setUsername(userEntity.getUsername());
         userDTO.setNickname(userEntity.getNickname());
         userDTO.setAvatar(userEntity.getAvatar());
-        userDTO.setRole(userEntity.getRole());
+        userDTO.setRole(userEntity.getRole().getName());
         userDTO.setToken(tokenEntity.getToken());
         userDTO.setRefreshToken(tokenEntity.getRefreshToken());
         return userDTO;
@@ -86,7 +87,7 @@ public class UserServiceImpl implements IUserService {
         userDTO.setUsername(userEntity.getUsername());
         userDTO.setNickname(userEntity.getNickname());
         userDTO.setAvatar(userEntity.getAvatar());
-        userDTO.setRole(userEntity.getRole());
+        userDTO.setRole(userEntity.getRole().getName());
         userDTO.setToken(tokenEntity.getToken());
         userDTO.setRefreshToken(tokenEntity.getRefreshToken());
         return userDTO;
@@ -131,8 +132,19 @@ public class UserServiceImpl implements IUserService {
         userEntity.setEmail(user.getEmail());
         userEntity.setPhone(user.getPhone());
         userEntity.setAddress(user.getAddress());
-        userEntity.setRole("user");
+        userEntity.setRole(existAdmin() ? RoleEnum.USER : RoleEnum.ADMIN);
         userEntity.setEnable("1");
         return this.save(userEntity);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        userMapper.deleteById(id);
+    }
+
+    private boolean existAdmin() {
+        UserEntity entity = new UserEntity();
+        entity.setRole(RoleEnum.ADMIN);
+        return userMapper.exists(Example.of(entity));
     }
 }

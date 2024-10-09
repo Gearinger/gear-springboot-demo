@@ -22,4 +22,6 @@ public interface IUserService {
     void logout();
 
     UserEntity register(UserRegisterDTO user);
+
+    void delete(Integer id);
 }
