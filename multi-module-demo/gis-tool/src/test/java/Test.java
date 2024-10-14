@@ -1,10 +1,8 @@
+import com.gear.gis.tool.GearFeature;
+import com.gear.gis.tool.GearFeatureClass;
 import com.gear.gis.tool.enums.DbType;
-import com.gear.gis.tool.interfaces.IGearConnection;
-import com.gear.gis.tool.interfaces.IGearDataStore;
-import com.gear.gis.tool.interfaces.IGearFeature;
-import com.gear.gis.tool.interfaces.IGearFeatureClass;
-import com.gear.gis.tool.interfaces.impl.GearConnection;
-import com.gear.gis.tool.interfaces.impl.GearDataStore;
+import com.gear.gis.tool.GearConnection;
+import com.gear.gis.tool.GearDataStore;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -21,7 +19,7 @@ public class Test {
         // 数据库
         try (GearDataStore dataStore = new GearDataStore(conn)) {
             // 要素集
-            IGearFeatureClass featureClass = dataStore.readFeatureClass();
+            GearFeatureClass featureClass = dataStore.readFeatureClass();
 //            System.out.println(featureClass.getFieldNameList());
 
             // 连接信息
@@ -30,13 +28,13 @@ public class Test {
             // 数据库
             try (GearDataStore dataStore2 = new GearDataStore(conn2)) {
                 // 要素集
-                IGearFeatureClass featureClass2 = dataStore2.readFeatureClass();
+                GearFeatureClass featureClass2 = dataStore2.readFeatureClass();
 //                Map<String, String> objectObjectHashMap = new HashMap<>();
 //                objectObjectHashMap.put("ID", "ID");
 //                featureClass2.addFeatures(featureClass, objectObjectHashMap);
-                IGearFeatureClass erase = featureClass2.erase(featureClass);
+                GearFeatureClass erase = featureClass2.erase(featureClass);
                 List<String> fieldNameList = erase.getFieldNameList();
-                for (IGearFeature fea : erase) {
+                for (GearFeature fea : erase) {
                     System.out.println(fea.getGeometry().getArea());
                 }
                 System.out.println(fieldNameList);
@@ -48,14 +46,14 @@ public class Test {
 
     @org.junit.jupiter.api.Test
     public void testPostGIS() throws Exception {
-        IGearConnection connection = new GearConnection(DbType.PostGIS, "127.0.0.1", "5432", "test", "postgres", "postgres");
-        IGearDataStore dataStore = new GearDataStore(connection);
+        GearConnection connection = new GearConnection(DbType.PostGIS, "127.0.0.1", "5432", "test", "postgres", "postgres");
+        GearDataStore dataStore = new GearDataStore(connection);
         String[] strings = dataStore.listFeatureClassName();
         System.out.println(Arrays.stream(strings).collect(Collectors.toList()));
 
-        IGearFeatureClass test = dataStore.readFeatureClass("test_field");
-        IGearFeatureClass intersect = test.intersect(test);
-        for (IGearFeature fea : intersect) {
+        GearFeatureClass test = dataStore.readFeatureClass("test_field");
+        GearFeatureClass intersect = test.intersect(test);
+        for (GearFeature fea : intersect) {
             fea.getFieldValue("ntlx");
         }
         intersect.exportShp("./temp/test/");
