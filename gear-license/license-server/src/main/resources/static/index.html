@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>许可管理</title>
+    <link rel="stylesheet" href="./styles.css">
+    </link>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 导航栏：创建许可证，验证激活码，生成密钥对 -->
+        <nav class="nav">
+            <a href="#">作者信息</a>
+            <a href="#">验证激活码</a>
+            <a href="#">生成密钥对</a>
+            <a href="#" @click="createLicenseModalVisiable=true">创建许可证</a>
+        </nav>
+        <!-- 许可证列表 -->
+        <div class="license-list">
+            <div class="license-item">
+                <div>名称</div>
+                <div>IP</div>
+                <div>创建时间</div>
+                <div>过期时间</div>
+                <div></div>
+            </div>
+            <div class="license-item" v-for="item in licenseList">
+                <div class="license-info">
+                    <div>{{item.licenseName}}</div>
+                    <div>{{item.ip}}</div>
+                    <div>{{new Date(item.createTime).toLocaleString()}}</div>
+                    <div>{{new Date(item.expireDate).toLocaleString()}}</div>
+                </div>
+                <div class="license-actions">
+                    <button>详情</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 创建许可证弹窗 -->
+        <div id="createLicenseModal" class="modal" v-show="createLicenseModalVisiable">
+            <div class="modal-content">
+                <span class="close" @click="createLicenseModalVisiable=false">&times;</span>
+                <h2>创建许可证</h2>
+                <form id="createLicenseForm">
+                    <label for="expireDate">过期日期:</label>
+                    <input type="text" id="expireDate" name="expireDate" required><br><br>
+                    <label for="mac">MAC地址:</label>
+                    <input type="text" id="mac" name="mac"><br><br>
+                    <label for="ip">IP地址:</label>
+                    <input type="text" id="ip" name="ip"><br><br>
+                    <label for="cpuSerial">CPU序列号:</label>
+                    <input type="text" id="cpuSerial" name="cpuSerial"><br><br>
+                    <label for="mainBoard">主板序列号:</label>
+                    <input type="text" id="mainBoard" name="mainBoard"><br><br>
+                    <button type="submit">提交</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="scripts.js"></script>
+
+</body>
+
+</html>

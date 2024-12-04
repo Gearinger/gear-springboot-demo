@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,19 +26,21 @@ public class LicenseService {
     private static List<LicenseServerInfo> list = new ArrayList<>();
 
     public String createLicense(LicenseParam licenseParam) {
-        String expireDate = licenseParam.getExpireDate();
+        if (StringUtils.isEmpty(licenseParam.getLicenseName())){
+            return "授权名称不能为空";
+        }
+        Timestamp expireDate = licenseParam.getExpireDate();
         try {
-            long l = Long.parseLong(expireDate);
-            if (l < System.currentTimeMillis()) {
+            if (expireDate.getTime() < System.currentTimeMillis()) {
                 return "过期时间不能小于当前时间";
             }
         } catch (Exception e) {
             return "过期时间格式异常";
         }
-        licenseParam.setIp(StringUtils.hasLength(licenseParam.getIp()) ? licenseParam.getIp() : "");
-        licenseParam.setMac(StringUtils.hasLength(licenseParam.getMac()) ? licenseParam.getMac() : "");
-        licenseParam.setCpuSerial(StringUtils.hasLength(licenseParam.getCpuSerial()) ? licenseParam.getCpuSerial() : "");
-        licenseParam.setMainBoard(StringUtils.hasLength(licenseParam.getMainBoard()) ? licenseParam.getMainBoard() : "");
+        licenseParam.setIp(StringUtils.hasLength(licenseParam.getIp()) ? licenseParam.getIp() : "*");
+        licenseParam.setMac(StringUtils.hasLength(licenseParam.getMac()) ? licenseParam.getMac() : "*");
+        licenseParam.setCpuSerial(StringUtils.hasLength(licenseParam.getCpuSerial()) ? licenseParam.getCpuSerial() : "*");
+        licenseParam.setMainBoard(StringUtils.hasLength(licenseParam.getMainBoard()) ? licenseParam.getMainBoard() : "*");
 
         String activeCode = LicenseCreateUtil.createActiveCode(licenseParam, licenseServerConfig.getLicensePrivateKey());
         LicenseServerInfo licenseServerInfo = new LicenseServerInfo(licenseParam, activeCode);

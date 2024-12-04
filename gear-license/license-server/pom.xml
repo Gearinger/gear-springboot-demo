@@ -24,11 +24,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.gear</groupId>
-            <artifactId>license-client</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
     </dependencies>
 
 </project>

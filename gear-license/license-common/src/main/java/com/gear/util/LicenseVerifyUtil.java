@@ -4,12 +4,12 @@ import com.gear.common.Base64Utils;
 import com.gear.common.IpUtils;
 import com.gear.common.LicenseException;
 import com.gear.common.RSAUtils;
-import com.gear.constant.Constant;
 import com.gear.model.AServerInfos;
 import com.gear.model.LicenseExtraParam;
 import com.gear.model.LicenseParam;
 import org.springframework.util.StringUtils;
 
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,11 +39,8 @@ public class LicenseVerifyUtil {
         }
     }
 
-    private static boolean validateTime(String timeStr) {
-        if (Constant.SYMBOL_START.equals(timeStr)) {
-            return true;
-        }
-        long time = Long.parseLong(timeStr);
+    private static boolean validateTime(Timestamp timeStr) {
+        long time = timeStr.getTime();
         long currentTime = System.currentTimeMillis();
         if (time >= currentTime && time >= CURRENT_TIME && currentTime >= CURRENT_TIME) {
             return true;
@@ -55,7 +52,7 @@ public class LicenseVerifyUtil {
         String result = getLicenseContent(encryptedData, publicKey);
         String[] split = result.split(SPLIT_STR);
         LicenseParam licenseParam = new LicenseParam();
-        licenseParam.setExpireDate(split[0]);
+        licenseParam.setExpireDate(Timestamp.valueOf(split[0]));
         licenseParam.setMac(split[1]);
         licenseParam.setCpuSerial(split[2]);
         licenseParam.setMainBoard(split[3]);

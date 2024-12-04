@@ -1,7 +1,9 @@
 package com.gear.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -12,10 +14,15 @@ import java.util.Date;
  */
 @Data
 public class LicenseParam {
+
+    /**
+     * 许可证名称
+     */
+    private String licenseName;
     /**
      * 到期日期（*，或者时间戳）
      */
-    private String expireDate;
+    private Timestamp expireDate;
 
     /**
      * 物理地址（*，或者字符串）
