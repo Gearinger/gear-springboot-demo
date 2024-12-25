@@ -1,7 +1,7 @@
-package com.gear.multi.file.chunk.uploader.service.impl;
+package io.github.gearinger.multi.file.chunk.uploader.service.impl;
 
-import com.gear.multi.file.chunk.uploader.dto.ChunkRecordDTO;
-import com.gear.multi.file.chunk.uploader.service.IChunkRecordService;
+import io.github.gearinger.multi.file.chunk.uploader.dto.ChunkRecordDTO;
+import io.github.gearinger.multi.file.chunk.uploader.service.IChunkRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

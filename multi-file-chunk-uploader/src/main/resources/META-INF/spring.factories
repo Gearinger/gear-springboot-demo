@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration = \
+  io.github.gearinger.multi.file.chunk.uploader.config.ChunkConfig,\
+  io.github.gearinger.multi.file.chunk.uploader.service.FileService,\
+  io.github.gearinger.multi.file.chunk.uploader.service.impl.ChunkRecordMemmoryServiceImpl,\
+  io.github.gearinger.multi.file.chunk.uploader.controller.FileController

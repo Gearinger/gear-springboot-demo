@@ -1,8 +1,8 @@
-package com.gear.multi.file.chunk.uploader.service;
+package io.github.gearinger.multi.file.chunk.uploader.service;
 
-import com.gear.multi.file.chunk.uploader.config.ChunkConfig;
-import com.gear.multi.file.chunk.uploader.dto.ChunkRecordDTO;
-import com.gear.multi.file.chunk.uploader.dto.ChunkWithFileRecordDTO;
+import io.github.gearinger.multi.file.chunk.uploader.config.ChunkConfig;
+import io.github.gearinger.multi.file.chunk.uploader.dto.ChunkRecordDTO;
+import io.github.gearinger.multi.file.chunk.uploader.dto.ChunkWithFileRecordDTO;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;

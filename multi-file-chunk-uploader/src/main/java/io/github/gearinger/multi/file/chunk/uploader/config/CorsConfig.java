@@ -1,4 +1,4 @@
-package com.gear.multi.file.chunk.uploader.config;
+package io.github.gearinger.multi.file.chunk.uploader.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

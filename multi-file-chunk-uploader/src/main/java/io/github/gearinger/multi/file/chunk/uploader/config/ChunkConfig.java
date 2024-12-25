@@ -1,6 +1,6 @@
-package com.gear.multi.file.chunk.uploader.config;
+package io.github.gearinger.multi.file.chunk.uploader.config;
 
-import com.gear.multi.file.chunk.uploader.RecordSaveTypeEnum;
+import io.github.gearinger.multi.file.chunk.uploader.RecordSaveTypeEnum;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

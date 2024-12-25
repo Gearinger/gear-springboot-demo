@@ -1,8 +1,8 @@
-package com.gear.multi.file.chunk.uploader.controller;
+package io.github.gearinger.multi.file.chunk.uploader.controller;
 
-import com.gear.multi.file.chunk.uploader.dto.ChunkRecordDTO;
-import com.gear.multi.file.chunk.uploader.dto.ChunkWithFileRecordDTO;
-import com.gear.multi.file.chunk.uploader.service.FileService;
+import io.github.gearinger.multi.file.chunk.uploader.dto.ChunkRecordDTO;
+import io.github.gearinger.multi.file.chunk.uploader.dto.ChunkWithFileRecordDTO;
+import io.github.gearinger.multi.file.chunk.uploader.service.FileService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;

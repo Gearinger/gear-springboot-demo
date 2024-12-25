@@ -1,4 +1,4 @@
-package com.gear.multi.file.chunk.uploader.dto;
+package io.github.gearinger.multi.file.chunk.uploader.dto;
 
 import lombok.Data;
 

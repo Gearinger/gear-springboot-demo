@@ -1,4 +1,4 @@
-package com.gear.multi.file.chunk.uploader;
+package io.github.gearinger.multi.file.chunk.uploader;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

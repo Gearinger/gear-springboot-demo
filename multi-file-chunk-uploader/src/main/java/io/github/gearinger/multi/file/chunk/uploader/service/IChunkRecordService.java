@@ -1,6 +1,6 @@
-package com.gear.multi.file.chunk.uploader.service;
+package io.github.gearinger.multi.file.chunk.uploader.service;
 
-import com.gear.multi.file.chunk.uploader.dto.ChunkRecordDTO;
+import io.github.gearinger.multi.file.chunk.uploader.dto.ChunkRecordDTO;
 
 import java.util.List;
 
