@@ -1,9 +1,9 @@
 package com.gear.common;
 
+import jakarta.activation.MimetypesFileTypeMap;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 

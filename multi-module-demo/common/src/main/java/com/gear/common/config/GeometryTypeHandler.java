@@ -21,16 +21,15 @@ import java.util.Objects;
 import static org.locationtech.jts.geom.Coordinate.NULL_ORDINATE;
 
 /**
- * @author: wangminghui
- * @date: 2022/4/13 19:46
- * @description: geometry字段入库处理
+ * 几何体类型处理程序
+ *
+ * @author guoyingdong
+ * @date 2024/12/24
  */
 @Slf4j
 @MappedJdbcTypes(value = JdbcType.JAVA_OBJECT, includeNullJdbcType = true)
 @MappedTypes({Geometry.class})
 public class GeometryTypeHandler extends BaseTypeHandler<Geometry> {
-//    private static final WKBWriter wkbWriter = new WKBWriter(3, true);
-//    private static final WKBWriter wkbWriter2D = new WKBWriter(2, true);
 
     private final GeometryFactory geometryFactory = new GeometryFactory();
 
